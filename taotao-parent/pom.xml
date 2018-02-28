@@ -77,7 +77,7 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
-        <scope>test</scope>
+        <!--<scope>test</scope>-->
       </dependency>
       <!-- 日志处理 -->
       <dependency>
@@ -144,6 +144,11 @@
         <artifactId>spring-aspects</artifactId>
         <version>${spring.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
       <!-- JSP相关 -->
       <dependency>
         <groupId>jstl</groupId>
@@ -162,8 +167,6 @@
         <version>${jsp-api.version}</version>
         <scope>provided</scope>
       </dependency>
-
-
       <!-- 文件上传组件 -->
       <dependency>
         <groupId>commons-fileupload</groupId>
