@@ -8,9 +8,10 @@
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
-  <!-- druid数据库连接池 -->
   <!-- 加载配置文件 -->
-  <context:property-placeholder location="classpath:resource/db.properties"/>
+  <context:property-placeholder location="classpath:resource/*.properties"/>
+
+  <!-- druid数据库连接池 -->
   <!-- 数据库连接池 -->
   <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
     destroy-method="close">
@@ -28,7 +29,7 @@
     <property name="dataSource" ref="dataSource"/>
   </bean>
 
-  <!-- 配置扫描包，加载mapper代理对象 -->
+  <!-- 配置扫描包，加载mapper代理对象到spring容器 -->
   <!-- 自动搜索加载sqlSessionFactory -->
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
     <property name="basePackage" value="com.taotao.mapper"/>
