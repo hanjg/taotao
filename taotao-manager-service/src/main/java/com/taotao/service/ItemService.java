@@ -4,6 +4,7 @@ import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemDesc;
+import com.taotao.pojo.TbItemParamItem;
 
 /**
  * @Author: hjg
@@ -16,5 +17,5 @@ public interface ItemService {
 
     EasyUIDataGridResult getItemList(int page, int rows);
 
-    TaotaoResult addItem(TbItem item, TbItemDesc itemDesc);
+    TaotaoResult addItem(TbItem item, TbItemDesc itemDesc,TbItemParamItem itemParamItem);
 }

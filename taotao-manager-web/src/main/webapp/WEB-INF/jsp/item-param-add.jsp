@@ -3,7 +3,7 @@
 <table cellpadding="5" style="margin-left: 30px" id="itemParamAddTable" class="itemParam">
 	<tr>
 		<td>商品类目:</td>
-		<td><a href="javascript:void(0)" class="easyui-linkbutton selectItemCat">选择类目</a> 
+		<td><a href="javascript:void(0)" class="easyui-linkbutton selectItemCat">选择类目</a>
 			<input type="hidden" name="cid" style="width: 280px;"></input>
 		</td>
 	</tr>
@@ -30,12 +30,12 @@
 				<input class="easyui-textbox" style="width: 150px;" name="group"/>&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton addParam"  title="添加参数" data-options="plain:true,iconCls:'icon-add'"></a>
 			</li>
 			<li>
-				<span>|-------</span><input  style="width: 150px;" class="easyui-textbox" name="param"/>&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton delParam" title="删除" data-options="plain:true,iconCls:'icon-cancel'"></a>						
+				<span>|-------</span><input  style="width: 150px;" class="easyui-textbox" name="param"/>&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton delParam" title="删除" data-options="plain:true,iconCls:'icon-cancel'"></a>
 			</li>
 		</ul>
 	</li>
 </div>
-<script style="text/javascript">
+<script type="text/javascript">
 	$(function(){
 		TAOTAO.initItemCat({
 			fun:function(node){
@@ -52,7 +52,7 @@
 			  });
 			}
 		});
-		
+
 		$(".addGroup").click(function(){
 			  var temple = $(".itemParamAddTemplate li").eq(0).clone();
 			  $(this).parent().parent().append(temple);
@@ -67,11 +67,11 @@
 				  $(this).parent().remove();
 			  });
 		 });
-		
+
 		$("#itemParamAddTable .close").click(function(){
 			$(".panel-tool-close").click();
 		});
-		
+
 		$("#itemParamAddTable .submit").click(function(){
 			var params = [];
 			var groups = $("#itemParamAddTable [name=group]");
@@ -81,7 +81,7 @@
 				p.each(function(_i,_e){
 					var _val = $(_e).siblings("input").val();
 					if($.trim(_val).length>0){
-						_ps.push(_val);						
+						_ps.push(_val);
 					}
 				});
 				var _val = $(e).siblings("input").val();
@@ -89,7 +89,7 @@
 					params.push({
 						"group":_val,
 						"params":_ps
-					});					
+					});
 				}
 			});
 			var url = "/item/param/save/"+$("#itemParamAddTable [name=cid]").val();
