@@ -129,6 +129,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.taotao.pojo.TbContent" >
+    <selectKey keyProperty="id" resultType="long" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into tb_content (id, category_id, title, 
       sub_title, title_desc, url, 
       pic, pic2, created, 
@@ -139,6 +142,9 @@
       #{updated,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.taotao.pojo.TbContent" >
+    <selectKey keyProperty="id" resultType="long" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into tb_content
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
