@@ -1,4 +1,4 @@
-package com.taotao.rest.service.impl;
+package com.taotao.rest.service;
 
 import com.taotao.common.utils.JsonUtils;
 import com.taotao.rest.pojo.CatResult;

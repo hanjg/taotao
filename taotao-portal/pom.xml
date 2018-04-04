@@ -19,6 +19,11 @@
       <artifactId>taotao-common</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>com.taotao</groupId>
+      <artifactId>taotao-manager-pojo</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
 
     <!-- Spring -->
     <dependency>
@@ -40,6 +45,11 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aspects</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
     </dependency>
     <!-- JSP相关 -->
     <dependency>

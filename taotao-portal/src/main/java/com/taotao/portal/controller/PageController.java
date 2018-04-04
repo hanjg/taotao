@@ -1,6 +1,13 @@
 package com.taotao.portal.controller;
 
+import com.taotao.common.utils.JsonUtils;
+import com.taotao.pojo.TbContent;
+import com.taotao.portal.pojo.IndexAd;
+import com.taotao.portal.service.ContentService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,14 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 
-    @RequestMapping("/")
-    public String showIndex() {
-        return "index";
-    }
+    @Autowired
+    private ContentService contentService;
 
-    @RequestMapping("/{page}")
-    public String showpage(@PathVariable String page) {
-        return page;
+    @RequestMapping("/index")
+    public String showIndex(Model model) {
+        List<IndexAd> indexAdList = contentService.getIndexAdList();
+        model.addAttribute("ad1", JsonUtils.objectToJson(indexAdList));
+        return "index";
     }
 
 }
