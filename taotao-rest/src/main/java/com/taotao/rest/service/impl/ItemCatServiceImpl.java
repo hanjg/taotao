@@ -1,15 +1,18 @@
 package com.taotao.rest.service.impl;
 
+import com.taotao.common.utils.JsonUtils;
 import com.taotao.mapper.TbItemCatMapper;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.pojo.TbItemCatExample;
 import com.taotao.pojo.TbItemCatExample.Criteria;
+import com.taotao.rest.dao.RedisDao;
 import com.taotao.rest.pojo.CatNode;
 import com.taotao.rest.pojo.CatResult;
 import com.taotao.rest.service.ItemCatService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,14 +23,37 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItemCatServiceImpl implements ItemCatService {
 
+    @Value("${ITEM_CATAGORY_LIST_REDIS_KEY}")
+    private String ITEM_CATAGORY_LIST_REDIS_KEY;
+
     @Autowired
     private TbItemCatMapper itemCatMapper;
+    @Autowired
+    private RedisDao redisDao;
 
     @Override
     public CatResult getItemCatList() {
+        //从缓存中读取
+        try {
+            String cache = redisDao.get(ITEM_CATAGORY_LIST_REDIS_KEY);
+            if (cache != null && !cache.isEmpty()) {
+                return JsonUtils.jsonToPojo(cache, CatResult.class);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         CatResult result = new CatResult();
         List<?> list = getListByParentId(0);
         result.setData(list);
+
+        //放入缓存
+        try {
+            String resultJson = JsonUtils.objectToJson(result);
+            redisDao.set(ITEM_CATAGORY_LIST_REDIS_KEY, resultJson);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return result;
     }
 

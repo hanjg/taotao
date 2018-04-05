@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.common.utils.HttpClientUtil;
 import com.taotao.mapper.TbContentMapper;
 import com.taotao.pojo.TbContent;
 import com.taotao.pojo.TbContentExample;
@@ -12,6 +13,7 @@ import com.taotao.service.ContentService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +23,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ContentServiceImpl implements ContentService {
+
+    @Value("${REST_BASE_URL}")
+    private String REST_BASE_URL;
+    @Value("${CONTENT_CACHE_URL}")
+    private String CONTENT_CACHE_URL;
 
     @Autowired
     private TbContentMapper contentMapper;
@@ -52,6 +59,13 @@ public class ContentServiceImpl implements ContentService {
 
         //contentId根据自增主键获得
         contentMapper.insert(content);
+
+        //同步redis缓存
+        try {
+            HttpClientUtil.doGet(REST_BASE_URL + CONTENT_CACHE_URL + String.valueOf(content.getCategoryId()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return TaotaoResult.ok(content);
     }
