@@ -77,6 +77,7 @@
         <configuration>
           <port>8082</port>
           <path>/</path>
+          <uriEncoding>UTF-8</uriEncoding>
         </configuration>
       </plugin>
     </plugins>

@@ -72,6 +72,7 @@
         <configuration>
           <port>8081</port>
           <path>/</path>
+          <uriEncoding>UTF-8</uriEncoding>
         </configuration>
       </plugin>
     </plugins>

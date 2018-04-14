@@ -80,6 +80,7 @@
         <configuration>
           <port>8083</port>
           <path>/</path>
+          <uriEncoding>UTF-8</uriEncoding>
         </configuration>
       </plugin>
     </plugins>
