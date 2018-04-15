@@ -221,11 +221,11 @@
 					<b></b>如果您发现商品信息不准确，欢迎纠错
 				</div>
 				<div id="item-desc" class="detail-content">
-						${itemDesc.itemDesc }
+						<%--${itemDesc.itemDesc }--%>
 				</div>
 			</div>
 			<div class="mc hide" data-widget="tab-content" id="product-detail-2">
-				${itemParam}
+				<%--${itemParam}--%>
 			</div>
 				<div class="mc  hide" data-widget="tab-content" id="product-detail-3"><div class="item-detail">液晶电视×1、底座×1、遥控器×1、使用说明书×1、电源线×1</div></div><div class="mc  hide" data-widget="tab-content" id="product-detail-4"></div><div class="mc hide " data-widget="tab-content" id="product-detail-5"><div class="item-detail">本产品全国联保，享受三包服务，质保期为：一年质保<br />本产品提供上门安装调试、提供上门检测和维修等售后服务，自收到商品之日起，如您所购买家电商品出现质量问题，请先联系厂家进行检测 ，凭厂商提供的故障检测证明，在“我的淘淘-客户服务-返修退换货”页面提交退换申请，将有专业售后人员提供服务。淘淘承诺您：30天内可为您退货或换货，180天内无需修理直接换货，超过180天按国家三包规定享受服务。<br />您可以查询本品牌在各地售后服务中心的联系方式，<a  class="link_1" href="http://www.changhong.com">请点击这儿查询......</a><br />
 						<br/>售后服务电话：400-811-1666<br/>品牌官方网站：<a href="http://www.changhong.com" target="_blank">http://www.changhong.com</a>

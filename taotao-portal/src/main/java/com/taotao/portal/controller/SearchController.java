@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Date: Create in 2018/4/14 12:06
  * @Description:
  */
- @Controller
+@Controller
 public class SearchController {
 
     @Autowired

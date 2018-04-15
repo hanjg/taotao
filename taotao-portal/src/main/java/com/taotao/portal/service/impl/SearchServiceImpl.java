@@ -2,7 +2,6 @@ package com.taotao.portal.service.impl;
 
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.HttpClientUtil;
-import com.taotao.portal.pojo.Item;
 import com.taotao.portal.pojo.SearchResult;
 import com.taotao.portal.service.SearchService;
 import java.util.HashMap;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @Date: Create in 2018/4/14 11:57
  * @Description:
  */
- @Service
+@Service
 public class SearchServiceImpl implements SearchService {
 
     @Value("${SEARCH_SERVICE_URL}")
