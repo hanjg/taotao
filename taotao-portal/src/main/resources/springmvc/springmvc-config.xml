@@ -15,4 +15,15 @@
     <property name="suffix" value=".jsp"/>
   </bean>
 
+  <!-- 加载配置文件 -->
+  <context:property-placeholder location="classpath:resource/*.properties"/>
+
+  <!-- 拦截器配置 -->
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <!-- 拦截订单类请求 -->
+      <mvc:mapping path="/item/**"/>
+      <bean class="com.taotao.portal.interceptor.LoginInterceptor"/>
+    </mvc:interceptor>
+  </mvc:interceptors>
 </beans>

@@ -1,6 +1,7 @@
 package com.taotao.sso.service.impl;
 
 import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.common.utils.CookieUtils;
 import com.taotao.common.utils.JsonUtils;
 import com.taotao.mapper.TbUserMapper;
 import com.taotao.pojo.TbUser;
@@ -11,6 +12,8 @@ import com.taotao.sso.service.UserService;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +34,8 @@ public class UserServiceImpl implements UserService {
     private String REDIS_USER_SESSION_KEY;
     @Value("${SSO_SESSION_EXPIRE}")
     private Integer SSO_SESSION_EXPIRE;
+    @Value("${TT_TOKEN}")
+    private String TT_TOKEN;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -80,7 +85,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public TaotaoResult userLogin(String username, String password) {
+    public TaotaoResult userLogin(String username, String password, HttpServletRequest request,
+            HttpServletResponse response) {
         //查询该用户
         TbUserExample example = new TbUserExample();
         Criteria criteria = example.createCriteria();
@@ -108,6 +114,9 @@ public class UserServiceImpl implements UserService {
         redisDao.set(key, JsonUtils.objectToJson(user));
         redisDao.expire(key, SSO_SESSION_EXPIRE);
 
+        //添加写cookie的逻辑，默认有效期为浏览器关闭
+        CookieUtils.setCookie(request, response, TT_TOKEN, token);
+
         return TaotaoResult.ok(token);
     }
 
@@ -128,11 +137,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public TaotaoResult userLogout(String token) {
+    public TaotaoResult userLogout(String token, HttpServletRequest request,
+            HttpServletResponse response) {
         //删除redis中的key
         String key = REDIS_USER_SESSION_KEY + ":" + token;
         redisDao.del(key);
 
+        //删除cookie
+        CookieUtils.deleteCookie(request, response, TT_TOKEN);
         return TaotaoResult.ok();
     }
 }

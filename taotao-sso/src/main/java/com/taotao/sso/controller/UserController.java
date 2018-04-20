@@ -2,9 +2,12 @@ package com.taotao.sso.controller;
 
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.ExceptionUtil;
+import com.taotao.common.utils.HttpClientUtil;
 import com.taotao.common.utils.JsonUtils;
 import com.taotao.pojo.TbUser;
 import com.taotao.sso.service.UserService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
@@ -77,9 +80,10 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public TaotaoResult userLogin(String username, String password) {
+    public TaotaoResult userLogin(String username, String password, HttpServletRequest request,
+            HttpServletResponse response) {
         try {
-            TaotaoResult result = userService.userLogin(username, password);
+            TaotaoResult result = userService.userLogin(username, password, request, response);
             return result;
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,11 +93,12 @@ public class UserController {
 
     @RequestMapping("/logout/{token}")
     @ResponseBody
-    public Object userLogout(@PathVariable String token, String callback) {
+    public Object userLogout(@PathVariable String token, String callback, HttpServletRequest request,
+            HttpServletResponse response) {
         LOGGER.debug("token: {}, callback: {}", token, callback);
         TaotaoResult result = null;
         try {
-            result = userService.userLogout(token);
+            result = userService.userLogout(token, request, response);
         } catch (Exception e) {
             e.printStackTrace();
             result = TaotaoResult.build(500, ExceptionUtil.getStackTrace(e));
@@ -131,4 +136,20 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/showLogin")
+    public String showLogin() {
+        return "redirect:/page/login";
+    }
+
+    @RequestMapping("/showRegister")
+    public String showRegister() {
+        return "redirect:/page/register";
+    }
+
+    @RequestMapping("/showLogout/{token}")
+    public String showLogout(@PathVariable String token, String callback) {
+        String url = "/user/logout/" + token + (callback == null ? "" : "?callback=" + callback);
+        LOGGER.debug("logout url: {}", url);
+        return "redirect:" + url;
+    }
 }
