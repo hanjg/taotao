@@ -237,5 +237,6 @@
     <module>../taotao-portal</module>
     <module>../taotao-search</module>
     <module>../taotao-sso</module>
+    <module>../taotao-order</module>
   </modules>
 </project>
