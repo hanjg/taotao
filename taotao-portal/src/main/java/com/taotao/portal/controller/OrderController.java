@@ -1,5 +1,6 @@
 package com.taotao.portal.controller;
 
+import com.taotao.pojo.TbUser;
 import com.taotao.portal.pojo.CartItem;
 import com.taotao.portal.pojo.Order;
 import com.taotao.portal.service.CartService;
@@ -36,8 +37,16 @@ public class OrderController {
     }
 
     @RequestMapping("/create")
-    public String createOrder(Order order, Model model) {
+    public String createOrder(Order order, Model model, HttpServletRequest request) {
+        //从request中获取用户信息
+        TbUser user = (TbUser) request.getAttribute("user");
+        //填充order
+        order.setUserId(user.getId());
+        order.setBuyerNick(user.getUsername());
+
+        //创建订单
         String orderId = orderService.createOrder(order);
+        //设置模型
         model.addAttribute("orderId", orderId);
         model.addAttribute("payment", order.getPayment());
         model.addAttribute("date", new DateTime().plusDays(3).toString("yyyy-MM-dd"));

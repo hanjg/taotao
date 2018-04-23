@@ -52,6 +52,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
 
+        //用户信息放入request
+        request.setAttribute("user",user);
         return true;
 
     }
