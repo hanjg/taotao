@@ -1,3 +1,5 @@
+
+
 ## 架构总结 ##
 - 使用了**面向服务的架构**（Service-Oriented Architecture， SOA）<br>![](https://img-blog.csdn.net/20180423164420102)
 
@@ -19,7 +21,7 @@
 
 ## 开发过程总结 ##
 1. [淘淘商城简介——淘淘商城（一）](https://blog.csdn.net/qq_40369829/article/details/79515237)：电商行业的了解和商城架构的分析。
-2. [后台管理系统框架搭建——淘淘商城（二）](https://blog.csdn.net/qq_40369829/article/details/79515255——淘淘商城（二）)：使用IDEA结合maven创建多模块工程taotao-manager。
+2. [后台管理系统框架搭建——淘淘商城（二）](https://blog.csdn.net/qq_40369829/article/details/79515255)：使用IDEA结合maven创建多模块工程taotao-manager。
 3. [SSM框架的整合——淘淘商城（三）](https://blog.csdn.net/qq_40369829/article/details/79515268)：对Mybatis、Spring、SpringMVC框架进行配置，实现整合。
 4. [商品列表功能实现——淘淘商城（四）](https://blog.csdn.net/qq_40369829/article/details/79515278)：基于SSM框架，使用pagehelper插件和datagrid组件完成分页展示功能。
 5. [商品类目选择——淘淘商城（五）](https://blog.csdn.net/qq_40369829/article/details/79515291)：使用easyui tree组件完成对商品类目的展示。
